@@ -1,0 +1,18 @@
+name: Mirror to Gitee
+on:
+  push:
+    branches:
+      - main                                    # 替换为自己的 fork GitHub 仓库分支名
+  schedule:
+    - cron: '0 0 * * *'                         # 每天午夜运行
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Yikun/hub-mirror-action@master
+        with:
+          src: github/zejunxu                   # 替换为自己的 GitHub 用户名
+          dst: gitee/zejunxu                    # 替换为自己的 Gitee 用户名
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          static_list: "sing-box-bak"           # 替换为自己的 GitHub 仓库的名
